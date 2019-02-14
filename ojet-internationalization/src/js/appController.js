@@ -6,9 +6,9 @@
 /*
  * Your application specific code will go here
  */
-define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'utils/Languages', 'ojs/ojmodule-element', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
-  'ojs/ojoffcanvas'],
-  function(oj, ko, moduleUtils, Languages) {
+define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'utils/Languages', 'ojs/ojarraydataprovider', 'ojs/ojlistdataproviderview', 'ojs/ojmodule-element', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
+  'ojs/ojoffcanvas', 'ojs/ojselectcombobox'],
+  function(oj, ko, moduleUtils, Languages, ArrayDataProvider, ListDataProviderView) {
      function ControllerViewModel() {
       var self = this;
 
@@ -81,23 +81,30 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'utils/Languages
       // User Info used in Global Navigation area
       self.userLogin = ko.observable("daniel.merchan@magicpigeon.com");
 
-      // Internationalization Area
-      console.log(Languages);
-      self.defaultLanguage = Languages.supportedLanguages.find(language => {
-        language.name === 'Spanish';
-      })
-      $('html').attr('lang',defaultLanguage);
-      oj.Config.setLocale(defaultLanguage);
-      self.setLangAction = event => {
-        const newLang = event.target.value;
-        oj.Config.setLocale(newLang, () => {
-          $('html').attr('lang', newLang);
-          if (newLang.startsWith('ar')) {
-            $('html').attr('dir','rtl');
-          } else {
-            $('html').attr('dir','ltr');
-          }
-        });
+      // Localization Block -> Move to a Web Component!!!!
+      // Default Language
+      self.defaultLanguage = Languages.getLocaleByLangName('Spanish');
+      Languages.setLocale(self.defaultLanguage.locale);
+      // Lang Combobox
+      self.currentLanguage = ko.observable(self.defaultLanguage.locale);
+      const mapLangFields = item => {
+        console.log(item);
+        const data = item['data'];
+        let mappedItem = {};
+        mappedItem['data'] = {};
+        mappedItem['data']['label'] = data['name'];
+        mappedItem['data']['value'] = data['locale'];
+        mappedItem['metadata'] = {'key': data['locale']};
+        return mappedItem;
+      }; 
+      const langMapping = {'mapFields': mapLangFields};
+      self.arraySupportedLanguages = new ArrayDataProvider(Languages.supportedLanguages, {keyAttributes: 'locale'});
+      self.languageDataProvider = new ListDataProviderView(self.arraySupportedLanguages, {'dataMapping': langMapping});
+      // Change Language
+      self.setLangAction = event => {    // Change Language Event
+        const newLocale = event.target.value;
+        console.log(`Old locale: ${Languages.getCurrentLocale()} and New Locale: ${newLocale}`); 
+        Languages.setLocale(newLocale);
       }
 
       // Footer
