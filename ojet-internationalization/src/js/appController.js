@@ -21,6 +21,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'utils/Languages
       // Localization Block!!!!
       // Initialization of the Translations
       self.initTranslations = () => {
+        // Header
+        // Application Name used in Branding Area
+        self.appName = ko.observable(oj.Translations.getTranslatedString("app.appName"));
         // Navigation Labels
         self.dashboardMenuLabel = ko.observable(oj.Translations.getTranslatedString('nav.dashboard'));
         self.incidentsMenuLabel = ko.observable(oj.Translations.getTranslatedString('nav.incidents'));
@@ -42,6 +45,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'utils/Languages
       }
       // Refresh the Translations
       self.refreshTranslations = () => {
+        // Header
+        // Application Name used in Branding Area
+        self.appName(oj.Translations.getTranslatedString("app.appName"));
         // Refresh Navigation Labels
         self.dashboardMenuLabel(oj.Translations.getTranslatedString('nav.dashboard'));
         self.incidentsMenuLabel(oj.Translations.getTranslatedString('nav.incidents'));
@@ -142,9 +148,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'utils/Languages
       // Add a close listener so we can move focus back to the toggle button when the drawer closes
       $("#navDrawer").on("ojclose", function() { $('#drawerToggleButton').focus(); });
 
-      // Header
-      // Application Name used in Branding Area
-      self.appName = ko.observable("OJET - Internationalization Example");
       // User Info used in Global Navigation area
       self.userLogin = ko.observable("daniel.merchan@magicpigeon.com");
 

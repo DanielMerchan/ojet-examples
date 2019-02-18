@@ -1,4 +1,7 @@
 define({
+    "app": {
+        "appName": "OJET Ejemplo de Internacionalización"
+    },
     "nav": {
         "dashboard": "Tablero",
         "incidents": "Incidentes",
