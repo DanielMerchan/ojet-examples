@@ -35,8 +35,15 @@ requirejs.config(
     'touchr': 'libs/touchr/touchr'    
   }
   //endinjector
-}
-);
+  ,config: {
+    ojL10n: {
+      merge: {
+        'ojtranslations/nls/ojtranslations': 'resources/nls/mytranslations'
+      }
+    }
+  }
+  
+});
 
 /**
  * A top-level require call executed by the Application.

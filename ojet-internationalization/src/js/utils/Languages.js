@@ -145,6 +145,8 @@ define(['ojs/ojcore'], (oj) => {
         * @access     public
         * 
         * @author Daniel Merchan Garcia
+        * 
+        * @event {localeChangedEvent} To inform other modules to refresh their translations
         *
         * @param {string}   newLocale   Contains the full name of the language (e.g.: 'es-ES')
         * @return void
@@ -152,7 +154,8 @@ define(['ojs/ojcore'], (oj) => {
         * Languages.setLocale('en-GB');
         * 
         */
-        setLocale: (newLocale) => {
+        setLocale: (newLocale, langCallback) => {
+            console.log(`Old locale: ${Languages.getCurrentLocale()} and New Locale: ${newLocale}`);
             oj.Config.setLocale(newLocale, () => {
                 $('html').attr('lang', newLocale);
                 if (newLocale.startsWith('ar')) {
@@ -160,6 +163,9 @@ define(['ojs/ojcore'], (oj) => {
                 } else {
                     $('html').attr('dir', 'ltr');
                 }
+                langCallback();
+                // Dispatch a JS Event to allow other modules to subscribe and change translations accordingly.
+                document.dispatchEvent(new CustomEvent('localeChangedEvent'));
             });
         },
 
@@ -209,6 +215,19 @@ define(['ojs/ojcore'], (oj) => {
             });
         },
 
+        /**
+        * @description Wrapper of the oj.Config.getLocale() of Oracle JET API
+        *
+        * @since      6.1.0
+        * @access     public
+        * 
+        * @author Daniel Merchan Garcia
+        *
+        * @return {Object} 
+        * 
+        * @example
+        * Languages.getLocale();
+        */
         getCurrentLocale: () => {
             return oj.Config.getLocale();
         }
