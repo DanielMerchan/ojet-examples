@@ -4,7 +4,7 @@ define({
             "appName": "OJET Internationalization Example"
         },
         "nav": {
-            "dashboard": "Culo",
+            "dashboard": "Dashboard",
             "incidents": "Incidents",
             "customers": "Customers",
             "about": "About"
