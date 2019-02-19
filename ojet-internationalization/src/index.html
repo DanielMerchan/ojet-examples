@@ -95,25 +95,36 @@
             </h1>
           </div>
           <div class="oj-flex-bar-end">
-            <!-- Responsive Toolbar -->
-            <oj-toolbar>
-              <!-- Language Selector -->
-              <oj-label for="langcbx">
+            
+            <!-- Language Selector -->
+            <div class='oj-flex-bar-start'>
+              <oj-label for="langcbx" class="oj-label-inline">
                 <!--ko text: laguangesLabel -->
                 <!-- /ko -->
               </oj-label>
+            </div>
+            <div class='oj-flex-bar-middle'>
+              <oj-select-one id="langcbx" value="{{currentLanguage}}" on-value-changed="[[setLangAction]]"
+                style="width:200px; margin-bottom: 0px;">
+                <oj-bind-for-each data='[[arrayLanguageSupportedLanguages]]'>
+                  <template>
+                    <oj-option value="[[$current.data.locale]]"><img style="vertical-align: middle"
+                        :src="[[$current.data.icon]]" />
+                      <oj-bind-text value="[[$current.data.name]]"></oj-bind-text>
+                    </oj-option>
+                  </template>
+                </oj-bind-for-each>
+              </oj-select-one>
+            </div>
+            
+            <!-- Responsive Toolbar -->
+            <oj-toolbar>
+              
               <!-- Old version without flags -->
               <!-- <oj-select-one id="langcbx" options="[[languageDataProvider]]" value="{{currentLanguage}}"
                 on-value-changed="[[setLangAction]]" style="width:200px; margin-bottom: 0px;">
               </oj-select-one> -->
-              <oj-select-one id="langcbx" value="{{currentLanguage}}"
-                on-value-changed="[[setLangAction]]" style="width:200px; margin-bottom: 0px;">
-                <oj-bind-for-each data='[[arrayLanguageSupportedLanguages]]'>
-                  <template>
-                    <oj-option value="[[$current.data.locale]]"><img style="vertical-align: middle" :src="[[$current.data.icon]]"/><oj-bind-text value="[[$current.data.name]]"></oj-bind-text></oj-option>
-                  </template>
-                </oj-bind-for-each>
-              </oj-select-one>
+
               <oj-menu-button id="userMenu" display="[[smScreen() ? 'icons' : 'all']]" chroming="half">
                 <span>
                   <oj-bind-text value="[[userLogin]]"></oj-bind-text>
