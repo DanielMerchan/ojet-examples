@@ -22,119 +22,148 @@ define(['ojs/ojcore'], (oj) => {
         supportedLanguages: [
             {
                 name: 'Arabic',
-                locale: 'ar-SA'
+                locale: 'ar-SA',
+                icon: '/css/images/flags/ar-SA.png'
             },
             {
                 name: 'Brazilian Portuguese',
-                locale: 'pt-BR'
+                locale: 'pt-BR',
+                icon: '/css/images/flags/pt-BR.png'
             },
             {
                 name: 'Canadian French',
-                locale: 'fr-CA'
+                locale: 'fr-CA',
+                icon: '/css/images/flags/fr-CA.png'
             },
             {
                 name: 'Czech',
-                locale: 'cs'
+                locale: 'cs',
+                icon: '/css/images/flags/cs.png'
             },
             {
                 name: 'Danish',
-                locale: 'da'
+                locale: 'da',
+                icon: '/css/images/flags/da.png'
             },
             {
                 name: 'Dutch',
-                locale: 'nl'
+                locale: 'nl',
+                icon: '/css/images/flags/nl.png'
             },
             {
                 name: 'English',
-                locale: 'en'
+                locale: 'en',
+                icon: '/css/images/flags/en-GB.png'
             },
             {
                 name: 'English USA',
-                locale: 'en-US'
+                locale: 'en-US',
+                icon: '/css/images/flags/en-US.png'
             },
             {
                 name: 'Finnish',
-                locale: 'fi'
+                locale: 'fi',
+                icon: '/css/images/flags/fi.png'
             },
             {
                 name: 'French',
-                locale: 'fr'
+                locale: 'fr',
+                icon: '/css/images/flags/fr.png'
             },
             {
                 name: 'German',
-                locale: 'de'
+                locale: 'de',
+                icon: '/css/images/flags/de.png'
             },
             {
                 name: 'Greek',
-                locale: 'el'
+                locale: 'el',
+                icon: '/css/images/flags/el.png'
             },
             {
                 name: 'Hebrew',
-                locale: 'he'
+                locale: 'he',
+                icon: '/css/images/flags/he.png'
             },
             {
                 name: 'Hungarian',
-                locale: 'hu'
+                locale: 'hu',
+                icon: '/css/images/flags/hu.png'
             },
             {
                 name: 'Italian',
-                locale: 'it'
+                locale: 'it',
+                icon: '/css/images/flags/it.png'
             },
             {
                 name: 'Japanese',
-                locale: 'jp'
+                locale: 'jp',
+                icon: '/css/images/flags/jp.png'
             },
             {
                 name: 'Korean',
-                locale: 'ko'
+                locale: 'ko',
+                icon: '/css/images/flags/ko.png'
             },
             {
                 name: 'Norwegian',
-                locale: 'no'
+                locale: 'no',
+                icon: '/css/images/flags/no.png'
             },
             {
                 name: 'Polish',
-                locale: 'pl'
+                locale: 'pl',
+                icon: '/css/images/flags/pl.png'
             },
             {
                 name: 'Portuguese',
-                locale: 'pt-PT'
+                locale: 'pt-PT',
+                icon: '/css/images/flags/pt-PT.png'
             },
             {
                 name: 'Romania',
-                locale: 'ro'
+                locale: 'ro',
+                icon: '/css/images/flags/ro.png'
             },
             {
                 name: 'Russian',
-                locale: 'ru'
+                locale: 'ru',
+                icon: '/css/images/flags/ru.png'
             },
             {
                 name: 'Simplified Chinese',
-                locale: 'zh-CN'
+                locale: 'zh-CN',
+                icon: '/css/images/flags/zh-CN.png'
             },
             {
                 name: 'Slovak',
-                locale: 'sk'
+                locale: 'sk',
+                icon: '/css/images/flags/sk.png'
             },
             {
                 name: 'Spanish',
-                locale: 'es'
+                locale: 'es',
+                icon: '/css/images/flags/es.png'
             },
             {
                 name: 'Swedish',
-                locale: 'sv'
+                locale: 'sv',
+                icon: '/css/images/flags/sv.png'
             },
             {
                 name: 'Thai',
-                locale: 'th'
+                locale: 'th',
+                icon: '/css/images/flags/th.png'
             },
             {
                 name: 'Traditional Chinese',
-                locale: 'zh-TW'
+                locale: 'zh-TW',
+                icon: '/css/images/flags/zh-TW.png'
             },
             {
                 name: 'Turkish',
-                locale: 'tr'
+                locale: 'tr',
+                icon: '/css/images/flags/tr.png'
             }
         ],
 

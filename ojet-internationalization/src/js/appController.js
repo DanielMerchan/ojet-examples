@@ -66,24 +66,29 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'utils/Languages
         self.termsofUseLabel(oj.Translations.getTranslatedString('footer.termsOfUse'));
         self.yourPrivacyRightsLabel(oj.Translations.getTranslatedString('footer.yourPrivacyRights'));
         console.log("AppController Translations refreshed");
-        console.log(self.aboutLabel);
+        console.log(self.preferencesLabel());
+         // Refresh OJ Components such as OJ-Menu due to a Bug
+         document.getElementById('menu1').refresh();
       }
+
       self.initTranslations();
     
       // Lang Combobox
       self.currentLanguage = ko.observable(Languages.getCurrentLocale());
-      const mapLangFields = item => {
-        const data = item['data'];
-        let mappedItem = {};
-        mappedItem['data'] = {};
-        mappedItem['data']['label'] = data['name'];
-        mappedItem['data']['value'] = data['locale'];
-        mappedItem['metadata'] = {'key': data['locale']};
-        return mappedItem;
-      }; 
-      const langMapping = {'mapFields': mapLangFields};
-      self.arraySupportedLanguages = new ArrayDataProvider(Languages.supportedLanguages, {keyAttributes: 'locale'});
-      self.languageDataProvider = new ListDataProviderView(self.arraySupportedLanguages, {'dataMapping': langMapping});
+      self.arrayLanguageSupportedLanguages = Languages.supportedLanguages;
+      // const mapLangFields = item => {
+      //   const data = item['data'];
+      //   let mappedItem = {};
+      //   mappedItem['data'] = {};
+      //   mappedItem['data']['label'] = data['name'];
+      //   mappedItem['data']['value'] = data['locale'];
+      //   mappedItem['metadata'] = {'key': data['locale']};
+      //   return mappedItem;
+      // }; 
+      // const langMapping = {'mapFields': mapLangFields};
+      
+      // self.arraySupportedLanguages = new ArrayDataProvider(self.arrayLanguageSupportedLanguages, {keyAttributes: 'locale'});
+      // self.languageDataProvider = new ListDataProviderView(self.arraySupportedLanguages, {'dataMapping': langMapping});
       
       // Change Language
       self.setLangAction = event => {    // Change Language Event
