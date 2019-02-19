@@ -108,15 +108,17 @@
                 style="width:200px; margin-bottom: 0px;">
                 <oj-bind-for-each data='[[arrayLanguageSupportedLanguages]]'>
                   <template>
-                    <oj-option value="[[$current.data.locale]]"><img style="vertical-align: middle"
-                        :src="[[$current.data.icon]]" />
+                    <oj-option value="[[$current.data.locale]]">
+                      <span slot="startIcon">
+                          <img role="presentation" style="vertical-align: middle":src="[[$current.data.icon]]"/>
+                      </span>
                       <oj-bind-text value="[[$current.data.name]]"></oj-bind-text>
                     </oj-option>
                   </template>
                 </oj-bind-for-each>
               </oj-select-one>
             </div>
-            
+
             <!-- Responsive Toolbar -->
             <oj-toolbar>
               
