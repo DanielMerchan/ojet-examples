@@ -66,9 +66,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'utils/Languages
         self.termsofUseLabel(oj.Translations.getTranslatedString('footer.termsOfUse'));
         self.yourPrivacyRightsLabel(oj.Translations.getTranslatedString('footer.yourPrivacyRights'));
         console.log("AppController Translations refreshed");
-        console.log(self.preferencesLabel());
-         // Refresh OJ Components such as OJ-Menu due to a Bug
-         document.getElementById('menu1').refresh();
       }
 
       self.initTranslations();

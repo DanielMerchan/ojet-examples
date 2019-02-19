@@ -21,5 +21,8 @@ define({
         "legalNotices": 'Avisos Legales',
         "termsOfUse": "Terminos de Uso",
         "yourPrivacyRights": "Tus derechos de privacidad"
+    },
+    "dashboard": {
+        "dashboardTitle": "Contenido del area del Tablero"
     }
 });

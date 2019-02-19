@@ -22,6 +22,9 @@ define({
             "legalNotices": 'Legal Notices',
             "termsOfUse": "Terms of Use",
             "yourPrivacyRights": "Your Privacy Rights"
+        },
+        "dashboard": {
+            "dashboardTitle": "Dashboard Content Area"
         }
     },
     "es": true

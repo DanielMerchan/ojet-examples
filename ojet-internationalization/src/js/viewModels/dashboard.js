@@ -13,6 +13,22 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
       var self = this;
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
+      
+      // Localisation
+      self.initTranslations = () => {
+        self.dashboardTitle = ko.observable(oj.Translations.getTranslatedString('dashboard.dashboardTitle'));
+      };
+
+      self.refreshTranslations = () => {
+        self.dashboardTitle(oj.Translations.getTranslatedString('dashboard.dashboardTitle'));
+      };
+
+      self.initTranslations();
+
+      // Listen to a Locale Change
+      document.addEventListener("localeChangedEvent", function () {
+        self.refreshTranslations();
+      });
 
       /**
        * Optional ViewModel method invoked after the View is inserted into the
