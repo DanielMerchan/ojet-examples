@@ -135,16 +135,16 @@
                   :class="[[{'oj-icon demo-appheader-avatar': smScreen(), 'oj-component-icon oj-button-menu-dropdown-icon': !smScreen()}]]"></span>
                 <oj-menu id="menu1" slot="menu" style="display:none">
                   <oj-option id="pref" value="pref">
-                    <oj-bind-text value="[[preferencesLabel]]"></oj-bind-text>
+                    <span><oj-bind-text value="[[preferencesLabel]]"></oj-bind-text></span>
                   </oj-option>
                   <oj-option id="help" value="help">
-                    <oj-bind-text value="[[helpLabel]]"></oj-bind-text>
+                    <span><oj-bind-text value="[[helpLabel]]"></oj-bind-text></span>
                   </oj-option>
                   <oj-option id="about" value="about">
-                    <oj-bind-text value="[[aboutLabel]]"></oj-bind-text>
+                    <span><oj-bind-text value="[[aboutLabel]]"></oj-bind-text></span>
                   </oj-option>
                   <oj-option id="out" value="out">
-                    <oj-bind-text value="[[signOutLabel]]"></oj-bind-text>
+                    <span><oj-bind-text value="[[signOutLabel]]"></oj-bind-text></span>
                   </oj-option>
                 </oj-menu>
               </oj-menu-button>
