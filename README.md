@@ -15,3 +15,8 @@ See: http://danielmerchanoracle.blogspot.com/2019/03/ojet-build-and-deploy-in-ap
 Includes three REST GET examples using Vanilla JavaScript < ES6, JQuery and JavaScript ES6+ Fetch, Await
 
 See: http://danielmerchanoracle.blogspot.com/2019/03/ojet-calling-rest-service.html
+
+## ojet-logging
+Integration of **js-logger** with Oracle JET for custom Logging and also pushing the Log to the Server if needed via REST Service. The REST service is not implemented, but the placeholder is there to do it ;).
+
+See: http://danielmerchanoracle.blogspot.com/2019/03/ojet-logging-with-js-logger.html
