@@ -66,7 +66,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
           var viewPath = 'views/' + name + '.html';
           var modelPath = 'viewModels/' + name;
           console.log(`name: ${name} viewPath: ${viewPath} modelPath: ${modelPath}`);
-
           var masterPromise = Promise.all([
             moduleUtils.createView({ 'viewPath': viewPath }),
             moduleUtils.createViewModel({ 'viewModelPath': modelPath })
@@ -80,96 +79,50 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
       };
 
       // Auxiliar function to return the Router Structure as JSON
-      const buildNavListData = (router, parentId) => {
-        var jsonData = [];
+      const buildJsonNavListData = (router, parentId) => {
+        let data = [];
 
         router.states.forEach(function (state) {
-          var hrefurl, childrenData = [];
+          let childrenData = [];
 
           if (state.value instanceof oj.Router) {
-            childrenData = buildNavListData(state.value, state.id);
+            childrenData = buildJsonNavListData(state.value, state.id);
           }
 
-          if (parentId) {
-            hrefurl = "?root=" + parentId + "&" + router.name + "=" + state.id;
-          }
-          else {
-            hrefurl = "?root=" + state.id;
-          }
+          // if (parentId) {
+          //   hrefurl = "?root=" + parentId + "&" + router.name + "=" + state.id;
+          // }
+          // else {
+          //   hrefurl = "?root=" + state.id;
+          // }
 
-          jsonData.push(
+          data.push(
             {
               'attr':
               {
                 // The id is the compound state to transition to this state
                 id: parentId ? parentId + '/' + state.id : state.id,
-                label: state.label,
-                href: hrefurl
+                label: state.label
+                // href: hrefurl
               },
               'children': childrenData
             });
         });
-        return jsonData;
+        return data;
       }
 
-      // const buildNavListData = (router, parentId) => {
-      //   var jsonData = [];
-
-      //   router.states.forEach(function (state) {
-      //     var hrefurl, childrenData = [];
-
-      //     if (state.value instanceof oj.Router) {
-      //       childrenData = buildNavListData(state.value, state.id);
-      //     }
-
-      //     if (parentId) {
-      //       hrefurl = "?root=" + parentId + "&" + router.name + "=" + state.id;
-      //     }
-      //     else {
-      //       hrefurl = "?root=" + state.id;
-      //     }
-
-      //     jsonData.push(
-      //       {
-      //         // The id is the compound state to transition to this state
-      //         id: parentId ? parentId + '/' + state.id : state.id,
-      //         label: state.label,
-      //         iconStyleClass: 'oj-navigationlist-item-icon demo-home-icon-24 demo-icon-font-24',
-      //         href: hrefurl,
-      //         children: childrenData
-      //       });
-      //   });
-      //   return jsonData;
-      // }
-
-
-      // // Navigation setup
-      // var navData = [
-      //   {
-      //     name: 'Home', id: 'home',
-      //     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-chart-icon-24'
-      //   },
-      //   {
-      //     name: 'HR', id: 'hr',
-      //     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-fire-icon-24'
-      //   },
-      //   {
-      //     name: 'Sales', id: 'sales',
-      //     iconClass: 'oj-navigationlist-item-icon demo-icon-font-24 demo-people-icon-24'
-      //   }
-      // ];
-      // const navData = buildNavListData(self.router,self.router.parentId);
-      // self.navDataSource = new oj.ArrayTableDataSource(navData, { idAttribute: 'id' });
-      const navData = buildNavListData(self.router, self.router.parentId);
-      self.navDataSource = new oj.JsonTreeDataSource(navData);
+      const navTreeData = buildJsonNavListData(self.router, self.router.parentId);
+      self.navJsonDataSource = new oj.JsonTreeDataSource(navTreeData);
 
       self.selectHandler = event => {
-        console.log("LOLOLO");
-        console.log(event.target.id);
-        event.preventDefault();
-        // Invoke go() with the selected item.
-        self.router.go(event.detail.key);
+        console.log("SelectHandler: " + event.detail.key);
+        if (event.detail.originalEvent) {
+            event.preventDefault();
+            // Invoke go() with the selected item.
+            self.router.go(event.detail.key);
+        }
       }
+
       self.selection = ko.computed(() => {
         var currentState = self.router.currentState(),
           childRouter, selection, data;
@@ -186,7 +139,6 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
             selection = currentState.id;
           }
         }
-
         return selection;
       }, self.router);
 
