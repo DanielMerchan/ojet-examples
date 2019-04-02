@@ -6,9 +6,9 @@
 /*
  * Your application specific code will go here
  */
-define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-element', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
-  'ojs/ojoffcanvas', 'ojs/ojjsontreedatasource'],
-  function (oj, ko, moduleUtils) {
+define(['ojs/ojcore', 'ojs/ojkeyset', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-element', 'ojs/ojrouter', 'ojs/ojknockout', 'ojs/ojarraytabledatasource',
+  'ojs/ojoffcanvas', 'ojs/ojjsontreedatasource',],
+  function (oj, keySet, ko, moduleUtils) {
     function ControllerViewModel() {
       var self = this;
 
@@ -18,7 +18,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
       var mdQuery = oj.ResponsiveUtils.getFrameworkQuery(oj.ResponsiveUtils.FRAMEWORK_QUERY_KEY.MD_UP);
       self.mdScreen = oj.ResponsiveKnockoutUtils.createMediaQueryObservable(mdQuery);
 
-      // Router setup
+      // 1. Router Setup. Calculates and contains all the links the user has access to.
+      // Improvement: It can only contain the Portals links and calculate the rest of the links "lazily" on demand when a top navigation item is clicked.
+      // This is just Demo Purpose
       self.router = oj.Router.rootInstance;
       self.router.configure({
         'home': {
@@ -41,7 +43,7 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
         'sales': {
           label: 'Sales',
           value: self.router.createChildRouter('salesportal', 'sales').configure({
-            'home': {
+            'home': {ff
               label: 'Home',
               isDefault: true
             },
@@ -52,10 +54,13 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
           })
         }
       });
-      oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
 
+      // 2. Keep the usage of URL parameters to determine View and View Model
+      oj.Router.defaults['urlAdapter'] = new oj.Router.urlParamAdapter();
       self.moduleConfig = ko.observable({ 'view': [], 'viewModel': null });
 
+      // 3. Modified version of the "loadModule" called from main.js.
+      // It takes into consideration the new folder structure for placing Portal items
       self.loadModule = function () {
         ko.computed(function () {
           var portalName = self.router.moduleConfig.name();
@@ -78,68 +83,116 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
         });
       };
 
-      // Auxiliar function to return the Router Structure as JSON
-      const buildJsonNavListData = (router, parentId) => {
+      // 4. Auxiliar function to construct a JSON Tree Structure of the hole navigation
+      const buildJsonNavTreeData = (router, parentId) => {
         let data = [];
 
-        router.states.forEach(function (state) {
+        router.states.forEach(state => {
           let childrenData = [];
 
           if (state.value instanceof oj.Router) {
-            childrenData = buildJsonNavListData(state.value, state.id);
+            childrenData = buildJsonNavTreeData(state.value, state.id);
           }
 
-          // if (parentId) {
-          //   hrefurl = "?root=" + parentId + "&" + router.name + "=" + state.id;
-          // }
-          // else {
-          //   hrefurl = "?root=" + state.id;
-          // }
+          let jsonData = {};
+          jsonData.attr = {
+            id: parentId ? parentId + '/' + state.id : state.id,
+            label: state.label
+          }
 
-          data.push(
-            {
-              'attr':
-              {
-                // The id is the compound state to transition to this state
-                id: parentId ? parentId + '/' + state.id : state.id,
-                label: state.label
-                // href: hrefurl
-              },
-              'children': childrenData
-            });
+          if (childrenData.length > 0) {
+            jsonData.children = childrenData;
+          }
+
+          data.push(jsonData);
+
         });
         return data;
       }
 
-      const navTreeData = buildJsonNavListData(self.router, self.router.parentId);
-      self.navJsonDataSource = new oj.JsonTreeDataSource(navTreeData);
 
+      // 5 Navigation Model in:
+      // JSON plain format that can be iterated by iterators
+      // JsonTreeDataSource if intended to be fully rendered in a vertical menu (like the Drawer)
+      self.navTreeData = buildJsonNavTreeData(self.router, self.router.parentId);
+      self.navJsonDataSource = new oj.JsonTreeDataSource(self.navTreeData);
+      
+      // 6. Only Current Childs for the selected portal
+      // Note it is unnecesary JsonTreeDataSource as we do not have more childs,
+      self.navJsonChildDataSource = ko.computed(() => {
+        let currentState = self.router.currentState(), childRouter;
+        let navJsonChildDataSource = [];
+        if (currentState && currentState.id) {
+          childRouter = currentState.value;
+        }
+        if (childRouter) {
+          childRouter.states.forEach(state => {
+            let jsonData = {};
+            jsonData.attr = {
+              id: (currentState.id + '/' + state.id),
+              label: state.label
+            }
+
+            navJsonChildDataSource.push(jsonData);
+          });
+        }
+        return  new oj.JsonTreeDataSource(navJsonChildDataSource);
+      }, self.router);
+
+      // 7. Selection handler to navigate to the specific Module
       self.selectHandler = event => {
-        console.log("SelectHandler: " + event.detail.key);
         if (event.detail.originalEvent) {
-            event.preventDefault();
-            // Invoke go() with the selected item.
-            self.router.go(event.detail.key);
+          event.preventDefault();
+          // Invoke go() with the selected item.
+          self.router.go(event.detail.key);
         }
       }
 
-      self.selection = ko.computed(() => {
-        var currentState = self.router.currentState(),
-          childRouter, selection, data;
+      // 8. Holds the current portal selected
+      self.portalSelection = ko.computed(() => {
+        var currentState = self.router.currentState(), portalSelection;
+        if (currentState && currentState.id) {
+          portalSelection = currentState.id;
+        }
+        return portalSelection;
+      }, self.router);
+
+
+      // 9. Calculates the current node selected
+      self.currentSelection = ko.computed(() => {
+        let currentState = self.router.currentState(),
+          childRouter, currentSelection;
         if (currentState && currentState.id) {
           childRouter = currentState.value;
           if (childRouter) {
-            selection = childRouter.stateId();
+            currentSelection = childRouter.stateId();
           }
-
-          if (selection) {
-            selection = currentState.id + '/' + selection;
+          if (currentSelection) {
+            currentSelection = currentState.id + '/' + currentSelection;
           }
           else {
-            selection = currentState.id;
+            currentSelection = currentState.id;
           }
         }
-        return selection;
+        return currentSelection;
+      }, self.router);
+
+      
+      // 10. Calculates if the current node is leaf or not to be clicked or not in Vertical and NavDrawer
+      self.leafOnly = context => {
+        return context['leaf'];
+      }
+
+      // 11. Calculates which is the Node to be expanded by default in Vertical and NavDrawer
+      self.expanded = ko.computed(() => {
+        var currentState = self.router.currentState(), childRouter, expanded;
+        if (currentState && currentState.id) {
+          childRouter = currentState.value;
+        }
+        if (childRouter) {
+          expanded = currentState.id;
+        }
+        return new keySet.ExpandedKeySet([expanded]);
       }, self.router);
 
       // Drawer
@@ -159,9 +212,9 @@ define(['ojs/ojcore', 'knockout', 'ojs/ojmodule-element-utils', 'ojs/ojmodule-el
 
       // Header
       // Application Name used in Branding Area
-      self.appName = ko.observable("App Name");
+      self.appName = ko.observable("Oracle WebCenter Portal to Oracle JET");
       // User Info used in Global Navigation area
-      self.userLogin = ko.observable("john.hancock@oracle.com");
+      self.userLogin = ko.observable("daniel.merchan");
 
       // Footer
       function footerLink(name, id, linkTarget) {

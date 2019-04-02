@@ -68,7 +68,7 @@
     <div id="navDrawer" role="navigation" class="oj-contrast-marker oj-web-applayout-offcanvas oj-offcanvas-start">
       <oj-navigation-list data="[[navJsonDataSource]]" edge="start"
         item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('item_template', true)]]" on-click="[[toggleDrawer]]"
-        selection="[[selection]]" on-oj-before-select="[[selectHandler]]">
+        selection="{{currentSelection}}" on-oj-before-select="[[selectHandler]]">
       </oj-navigation-list>
     </div>
     <div id="pageContent" class="oj-web-applayout-page">
@@ -114,26 +114,35 @@
           </div>
         </div>
         <div role="navigation" class="oj-web-applayout-max-width oj-web-applayout-navbar">
-          <!-- <oj-navigation-list class="oj-sm-only-hide oj-md-condense oj-md-justify-content-flex-end"
-            item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('item_template', true)]]"
-                                edge="top" data="[[navDataSource]]"
-                                selection="[[selection]]" 
-                                    on-oj-before-select="[[selectHandler]]">
-            </oj-navigation-list> -->
           <oj-navigation-list class="oj-sm-only-hide oj-md-condense oj-md-justify-content-flex-end"
-            edge="top" 
-            data="[[navJsonDataSource]]" selection="[[selection]]" on-oj-before-select="[[selectHandler]]">
-            <template slot="itemTemplate" data-oj-as="item">
-                <li :id="[[item.data.id]]">
-                        <a href="#"><oj-bind-text value="[[item.data.label]]"></oj-bind-text></a>
-                    </li>
-                </li>
-            </template>
+                              edge="top"
+                              selection="{{portalSelection}}"
+                              on-oj-before-select="[[selectHandler]]">
+              <ul>
+                <oj-bind-for-each data="[[navTreeData]]" as="navItem">
+                  <template>
+                    <li :id="[[navItem.data.attr.id]]">
+                      <a href="#"><oj-bind-text value="[[navItem.data.attr.label]]"></oj-bind-text></a>
+                  </li>
+                  </template>
+                </oj-bind-for-each>
+              </ul>
+          </oj-navigation-list>
+        </header>
+      </header>
+      <div class="oj-flex oj-flex-items-pad oj-web-applayout-max-width oj-web-applayout-content">
+        <div role="navigation" class="oj-lg-2 oj-md-4 oj-flex-item oj-sm-only-hide">
+          <h3><oj-bind-text value="[[router.currentState().label]]"></oj-bind-text> Portal Navigation</h3> 
+          <oj-navigation-list id="menu" class=" oj-md-condense" item.selectable="[[leafOnly]]" item.focusable="[[leafOnly]]" expanded="{{expanded}}"
+            data="[[navJsonChildDataSource]]" drill-mode="collapsible" on-oj-before-select="[[selectHandler]]" selection-mode="single"
+            selection="{{currentSelection}}" item.renderer="[[oj.KnockoutTemplateUtils.getRenderer('item_template', true)]]">
           </oj-navigation-list>
         </div>
-      </header>
-      <oj-module role="main" class="oj-web-applayout-max-width oj-web-applayout-content" config="[[moduleConfig]]">
-      </oj-module>
+        <div role="main" class="oj-lg-10 oj-md-6 oj-flex-item">
+          <oj-module config="[[moduleConfig]]">
+          </oj-module>
+        </div>
+      </div>
       <footer class="oj-web-applayout-footer" role="contentinfo">
         <div class="oj-web-applayout-footer-item oj-web-applayout-max-width">
           <ul>
@@ -153,7 +162,7 @@
     </div>
   </div>
   <script type="text/html" id="item_template">
-        <li data-bind="attr:{ id : $data['id']}">
+        <li>
             <a data-bind="text: $data['label']" href="#"></a>
         </li>
      </script>
