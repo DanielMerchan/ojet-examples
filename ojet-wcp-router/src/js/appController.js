@@ -43,7 +43,7 @@ define(['ojs/ojcore', 'ojs/ojkeyset', 'knockout', 'ojs/ojmodule-element-utils', 
         'sales': {
           label: 'Sales',
           value: self.router.createChildRouter('salesportal', 'sales').configure({
-            'home': {ff
+            'home': {
               label: 'Home',
               isDefault: true
             },
