@@ -1,5 +1,7 @@
 # Oracle JET : JET Examples
 
+**Version 6.1.0 of Oracle JET**
+
 ## ojet-interationalization
 
 Contains the Logic for changing and managing the current Language.
