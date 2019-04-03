@@ -1,0 +1,42 @@
+<!--
+ Copyright (c) 2014, 2019, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+ <div class="oj-hybrid-padding">
+    <h1>Page Traffic OJ-Module</h1>
+    <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+      <div id='chart-container'>
+       <div style="float:left;padding-left:16px">
+          <oj-label for="splitDualYButtonSet">
+              Split Dual-Y
+          </oj-label>
+          <oj-buttonset-one id="splitDualYButtonSet" class="oj-buttonset-width-auto" aria-label="Choose only one setting." aria-controls="barChart"
+                                value="{{dualY}}" on-value-changed="[[updateDualY]]">
+              <!-- ko foreach: dualYOptions -->
+              <oj-option value="[[value]]"><span data-bind="text:label"></span></oj-option>
+              <!-- /ko -->
+          </oj-buttonset-one>
+        </div>
+        <div style='float:left;padding-left: 32px;'>  
+         <oj-label for="splitterPosition" style="padding-bottom:5px">Splitter Position</oj-label>  
+         <oj-input-number id="splitterPosition" max="1" min="0" step="0.1" disabled="true" value="{{splitterValue}}" style="max-width:50px;"></oj-input-number>
+        </div>
+        <div style="clear:both"></div>
+          <oj-chart id="barChart"
+              type="bar"
+              series="[[barSeriesValue]]"
+              groups="[[barGroupsValue]]" 
+              animation-on-display="auto"
+              animation-on-data-change="auto"
+              orientation="[[orientationValue]]"
+              stack="[[stackValue]]"
+              split-dual-y="[[dualY]]"
+              splitter-position="[[splitterValue]]"
+              legend.position="top"
+              y-axis.title="Y1 Axis Title"
+              y2-axis.title="Y2 Axis Title"
+              style="max-width:500px;width:100%;height:350px;">
+          </oj-chart>
+      </div>
+    </div>
+  </div>

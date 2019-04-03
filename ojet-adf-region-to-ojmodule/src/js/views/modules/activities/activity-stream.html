@@ -1,0 +1,56 @@
+<!--
+ Copyright (c) 2014, 2019, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div>
+  <h1>Activity Stream OJ-Module</h1>
+  <div id="componentDemoContent" style="width: 1px; min-width: 100%;">
+        
+    <div id='chart-container'>
+      <oj-label for="radioButtonset3" style="float:left;line-height:32px;padding-right:16px">
+        Selection:
+      </oj-label>
+      <!-- selection toggle button -->
+      <oj-buttonset-one id="radioButtonset3" class="oj-buttonset-width-auto" 
+        aria-label="Choose only one setting." aria-controls="stockChart"
+        value="{{selectionValue}}" on-value-changed="[[selectionValueChange]]">
+          <!-- ko foreach: selectionOptions -->
+          <oj-option value="[[value]]"><span data-bind="text:label"></span></oj-option>
+          <!-- /ko -->
+      </oj-buttonset-one>
+      <div>
+        <oj-chart id="stockChart"
+            type="stock"
+            groups="[[groupValues]]"
+            series="[[seriesValues]]"
+            y-axis.tick-label.converter="[[yAxisConverter]]"
+            legend.rendered="off"
+            selection-mode="[[selectionValue]]"
+            selection="{{selectedItemsValue}}"
+            hide-and-show-behavior="withRescale"
+            value-formats.series.tooltip-label="Name"
+            value-formats.group.tooltip-label="Date"
+            on-selection-changed="[[selectionListener]]"
+            style="max-width:500px;width:100%;height:350px;display:inline-block;vertical-align:top;">
+        </oj-chart>
+        <div style="display:inline-block;vertical-align:top;margin-top:20px;">
+          <h5 id="currentText" data-bind="html: selectText" style="display:inline-block;vertical-align:top;"></h5>
+          <h5 id="currentText2" data-bind="html: selectionInfo" style="padding-left:8px;display:inline-block;vertical-align:top;"></h5>
+        </div>
+        <oj-label for="basicSelect" style="clear:left;line-height:32px;padding-right:16px">
+          Series Type:
+        </oj-label>
+        <oj-select-one id="basicSelect" value="{{seriesTypeValue}}" style="max-width:7em">
+          <oj-option value="auto">auto</oj-option>
+          <oj-option value="area">area</oj-option>
+          <oj-option value="bar">bar</oj-option>
+          <oj-option value="candlestick">candlestick</oj-option>
+          <oj-option value="line">line</oj-option>
+          <oj-option value="lineWithArea">lineWithArea</oj-option>
+        </oj-select-one>
+      </div>
+    </div>
+
+    
+  </div>
+</div>
