@@ -1,0 +1,39 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div>
+  <h1>Customers List Area</h1>
+  <oj-list-view id="listview" aria-label="list using array" data="[[customersArrayDataProvider]]" on-selection-changed="[[onSelectCustomer]]"
+    selection-mode="single">
+    <template slot="itemTemplate">
+      <div class="oj-flex">
+        <div>
+          <div class="oj-flex oj-flex-items-pad row">
+            <div class="oj-flex-item">
+              <span class="header">
+                <oj-bind-text value="[[$current.data.id]]"></oj-bind-text>
+              </span>
+            </div>
+            <div class="oj-flex-item">
+              <div class="oj-lg-4 oj-sm-12 oj-flex-item">
+                <span class="data">
+                  <b>Age: </b><span>
+                    <oj-bind-text value="[[$current.data.name]]"></oj-bind-text>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div class="oj-flex-item">
+                <div class="oj-lg-4 oj-sm-12 oj-flex-item">
+                  <span class="data">
+                    <b>Age: </b><oj-bind-text value="[[$current.data.age]]"></oj-bind-text>
+                  </span>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </oj-list-view>
+</div>

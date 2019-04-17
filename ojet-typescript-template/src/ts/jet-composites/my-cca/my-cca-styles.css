@@ -1,0 +1,8 @@
+my-cca:not(.oj-complete){
+  visibility: hidden;
+}
+
+my-cca{
+	min-height: 50px;
+	width: 50px;
+}

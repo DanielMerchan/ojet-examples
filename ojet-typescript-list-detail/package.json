@@ -1,0 +1,15 @@
+{
+  "name": "ojet-typescript-list-detail",
+  "version": "2.0.0",
+  "description": "An Oracle JavaScript Extension Toolkit(JET) web app for TypeScript",
+  "dependencies": {
+    "@oracle/oraclejet": "~6.2.0"
+  },
+  "devDependencies": {
+    "@oracle/oraclejet-tooling": "~6.2.0"
+  },
+  "engines": {
+    "node": ">=5.0.0"
+  },
+  "private": true
+}

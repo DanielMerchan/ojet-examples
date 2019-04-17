@@ -1,0 +1,49 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+ <div>
+    <h1>Customers Detail Area</h1>
+    <div id="detail-container">
+
+        <oj-toolbar id='myToolbar' aria-label='Editing Toolbar' aria-controls='controlled'
+        class="oj-toolbar-bottom-border">
+            <oj-button on-click="[[backButtonAction]]">
+                <span>Back to List</span>
+            </oj-button>
+        </oj-toolbar>
+    
+        <h3>Customer: <oj-bind-text id="control1"
+          value="[[customerSelected().id]]"></oj-bind-text></h3>
+    
+        <div class="oj-form-layout">
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <oj-label for="control2">Name</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-bind-text id="control2"
+                            value="[[customerSelected().name]]"></oj-bind-text>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-label for="control3">Age</oj-label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <oj-bind-text id="control3"
+                            value="[[customerSelected().age]]"></oj-bind-text>
+                    </div>
+                </div>
+    
+                <!-- <oj-toolbar id='myToolbar2' aria-label='Editing Toolbar' aria-controls='controlled'
+                class="oj-toolbar-top-border">
+                    <oj-button disabled="[[isEdit]]" on-click="[[handleEdit]]">Edit</oj-button>
+                    <oj-button disabled="[[!isEdit()]]" on-click="[[handleSave]]">Save</oj-button>
+                </oj-toolbar> -->
+    
+            </div>
+        </div>
+    </div>
+    
+  </div>
+  
