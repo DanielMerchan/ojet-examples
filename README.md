@@ -25,13 +25,16 @@ See: http://danielmerchanoracle.blogspot.com/2019/03/ojet-logging-with-js-logger
 
 ## ojet-wcp-router
 A possible way to move from Oracle WebCenter Portal Navigation model to Oracle JET Router
+
 See: http://danielmerchanoracle.blogspot.com/2019/04/wcp-navigation-model-to-ojet-router.html
 
 ## ojet-adf-region-to-ojmodule
 Contains an example based on **ojet-wcp-router** which uses the concept of <oj-module> (Oracle JET Module Architecture) to build re-usable modules such as ADF Regions / Portlets are in Oracle WebCenter Portal
+  
 See: http://danielmerchanoracle.blogspot.com/2019/04/wcpadf-to-ojet-adf-taskflow-portlet-to-ojet-module.html
 
 ## ojet-typescript-template
 Contains the Oracle JET TypeScript started template of https://www.oracle.com/technetwork/developer-tools/jet/downloads/index.html
 with a minor fix in the Router configuration
+
 See: http://danielmerchanoracle.blogspot.com/2019/04/ojet-bug-with-routing-in-typescript-template.html
