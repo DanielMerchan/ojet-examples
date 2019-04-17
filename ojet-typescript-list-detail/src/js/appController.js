@@ -15,9 +15,9 @@ define(["require", "exports", "knockout", "ojs/ojrouter", "./Utils", "ojs/ojarra
             self.router.configure({
                 'dashboard': { label: 'Dashboard', isDefault: true },
                 'incidents': { label: 'Incidents' },
-                'customers': { label: 'Customers', value: self.router.createChildRouter('customersnav', 'customers').configure({
-                        'list': { label: 'List', value: 'list', isDefault: true },
-                        'detail/{id}/{edit}': { label: 'Detail', value: 'detail' }
+                'customers': { label: 'Customers', value: self.router.createChildRouter('customers').configure({
+                        'list': { label: 'List', isDefault: true },
+                        'detail/{id}/{edit}': { label: 'Detail' }
                     }) },
                 'about': { label: 'About' }
             });

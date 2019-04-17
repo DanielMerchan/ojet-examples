@@ -6,12 +6,14 @@ define(["require", "exports", "ojs/ojmodule-element-utils"], function (require, 
         Utils.resolveViewAndViewModel = function (name, moduleConfig, cleanUpMode, params) {
             var viewPath = 'views/' + name + '.html';
             var viewmodelPath = 'viewModels/' + name;
+            console.log(viewPath + ' ' + viewmodelPath);
             var viewPromises = Promise.all([
                 ModuleElementUtils.createView({ viewPath: viewPath }),
                 ModuleElementUtils.createViewModel({ viewModelPath: viewmodelPath })
             ]);
             viewPromises.then(function (values) {
                 var viewModel = new values[1](params);
+                console.log(viewModel);
                 moduleConfig({ view: values[0], viewModel: viewModel, cleanupMode: cleanUpMode ? cleanUpMode : "onDisconnect" });
             }, function (rejectReason) {
                 console.log(rejectReason);

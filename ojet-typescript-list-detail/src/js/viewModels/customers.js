@@ -23,20 +23,33 @@ define(["require", "exports", "knockout", "../Utils", "ojs/ojrouter", "signals",
             var defaultConfig = { view: [], viewModel: Object, cleanupMode: "onDisconnect" };
             self.moduleConfig = ko.observable(defaultConfig);
             // Default module reflected in URL
-            self.router.go("customers/list");
-            Utils.resolveViewAndViewModel('customers/list', self.moduleConfig, 'none', { 'customerSelectedSignal': self.customerSelectedSignal, 'customers': CustomersViewModel.customers });
+            self.custChildRouter = self.router.getCurrentChildRouter();
+            if (self.custChildRouter.stateId() === 'detail') {
+                var mc = self.custChildRouter.observableModuleConfig();
+                var customerId = mc.params['ojRouter']['parameters']['id']();
+                CustomersViewModel.navigateToDetail(self.custChildRouter, self.moduleConfig, self.backToListSignal, CustomersViewModel.customers, customerId);
+            }
+            else {
+                console.log(self.custChildRouter);
+                CustomersViewModel.navigateToList(self.custChildRouter, self.moduleConfig, self.customerSelectedSignal, CustomersViewModel.customers);
+            }
             self.customerSelectedSignal.add(function (customerId) {
-                self.router.go("customers/detail/" + customerId);
-                Utils.resolveViewAndViewModel('customers/detail', self.moduleConfig, 'none', { 'backToListSignal': self.backToListSignal, 'customers': CustomersViewModel.customers, 'customerId': customerId[0] });
+                CustomersViewModel.navigateToDetail(self.custChildRouter, self.moduleConfig, self.backToListSignal, CustomersViewModel.customers, customerId[0]);
             });
             self.backToListSignal.add(function () {
-                self.router.go("customers/list");
-                Utils.resolveViewAndViewModel('customers/list', self.moduleConfig, 'none', { 'customerSelectedSignal': self.customerSelectedSignal, 'customers': CustomersViewModel.customers });
+                CustomersViewModel.navigateToList(self.custChildRouter, self.moduleConfig, self.customerSelectedSignal, CustomersViewModel.customers);
             });
         }
         CustomersViewModel.initializeCustomers = function () {
-            console.log("init");
             CustomersViewModel.customers = [{ id: 0, name: 'Paco', age: 22 }, { id: 1, name: 'Eva', age: 30 }];
+        };
+        CustomersViewModel.navigateToDetail = function (router, moduleConfig, backToListSignal, customers, customerId) {
+            router.go("detail/" + customerId);
+            Utils.resolveViewAndViewModel('customers/detail', moduleConfig, 'none', { 'backToListSignal': backToListSignal, 'customers': customers, 'customerId': customerId });
+        };
+        CustomersViewModel.navigateToList = function (router, moduleConfig, customerSelectedSignal, customers) {
+            router.go("list");
+            Utils.resolveViewAndViewModel('customers/list', moduleConfig, 'none', { 'customerSelectedSignal': customerSelectedSignal, 'customers': customers });
         };
         /*
          * Optional ViewModel method invoked after the View is inserted into the

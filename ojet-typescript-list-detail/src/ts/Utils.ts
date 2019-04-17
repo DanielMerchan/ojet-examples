@@ -9,6 +9,7 @@ class Utils {
     public static resolveViewAndViewModel = (name: string, moduleConfig: KnockoutObservable<ojModule['config']>, cleanUpMode?: "onDisconnect"|"none", params?: any) =>{
         let viewPath = 'views/'+ name+ '.html';
         let viewmodelPath = 'viewModels/'+name;
+        console.log(viewPath + ' ' + viewmodelPath);
         let viewPromises = Promise.all([
             ModuleElementUtils.createView({viewPath: viewPath}),
             ModuleElementUtils.createViewModel({viewModelPath: viewmodelPath})
@@ -16,6 +17,7 @@ class Utils {
         viewPromises.then(
             (values) => {
                 const viewModel = new values[1](params);
+                console.log(viewModel);
                 moduleConfig({view: values[0], viewModel: viewModel, cleanupMode: cleanUpMode? cleanUpMode: "onDisconnect"});
             },
             (rejectReason) => {

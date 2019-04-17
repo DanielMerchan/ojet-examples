@@ -8,20 +8,14 @@ class Root {
     router: Router;
 
     constructor() {
-        
         let self = this;
         self.router = Router.rootInstance;
-        self.router.configure({
-            'dashboard': { label: 'Dashboard', isDefault: true },
-            'incidents': { label: 'Incidents' },
-            'customers': { label: 'Customers' },
-            'about': { label: 'About' }
-        });
+        const rootVM = new RootViewModel();
         Router.defaults['urlAdapter'] = new Router.urlParamAdapter();
         Router.sync().then(
             function() {
                 // bind your ViewModel for the content of the whole page body.
-                ko.applyBindings(new RootViewModel(), document.getElementById('globalBody'));
+                ko.applyBindings(rootVM, document.getElementById('globalBody'));
             },
             function(error) {
                 Logger.error('Error in root start: ' + error.message);

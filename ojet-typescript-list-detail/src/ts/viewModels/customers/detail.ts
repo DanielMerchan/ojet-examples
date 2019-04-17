@@ -26,7 +26,7 @@ class CustomersDetailViewModel {
         const customers = params.customers;
         const customerId = params.customerId;
         self.customerSelected =  ko.observable(customers[customerId]);
-        self.backButtonAction = (event: ojButton.ojAction) => {
+        self.backButtonAction = (_event: ojButton.ojAction) => {
             this.backToListSignal.dispatch();
         }
     }

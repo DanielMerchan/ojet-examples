@@ -23,14 +23,24 @@ class CustomersViewModel {
 
     // 
     router: Router;
+    custChildRouter: Router;
     moduleConfig: KnockoutObservable<ojModule['config']>;
     customerSelectedSignal: signals.Signal;
     backToListSignal: signals.Signal;
     static customers: Array<Customer>;
 
     static initializeCustomers() {
-        console.log("init");
         CustomersViewModel.customers = [{id: 0, name: 'Paco', age: 22 },{id: 1, name: 'Eva', age:30}];
+    }
+
+    static navigateToDetail(router: Router, moduleConfig: KnockoutObservable<ojModule['config']>, backToListSignal: signals.Signal, customers: Array<Customer>, customerId: Number): void {
+        router.go(`detail/${customerId}`);
+        Utils.resolveViewAndViewModel('customers/detail', moduleConfig, 'none', { 'backToListSignal': backToListSignal, 'customers': customers, 'customerId': customerId});
+    }
+
+    static navigateToList(router: Router, moduleConfig: KnockoutObservable<ojModule['config']>, customerSelectedSignal: signals.Signal, customers: Array<Customer>): void {
+        router.go(`list`);
+        Utils.resolveViewAndViewModel('customers/list', moduleConfig, 'none', { 'customerSelectedSignal': customerSelectedSignal, 'customers': customers});
     }
 
     constructor() {
@@ -44,18 +54,24 @@ class CustomersViewModel {
         let defaultConfig: ojModule['config'] = { view: [], viewModel: Object, cleanupMode: "onDisconnect" };
         self.moduleConfig = ko.observable(defaultConfig);
         // Default module reflected in URL
-        self.router.go(`customers/list`);
-        Utils.resolveViewAndViewModel('customers/list', self.moduleConfig, 'none', { 'customerSelectedSignal': self.customerSelectedSignal, 'customers': CustomersViewModel.customers});
+        self.custChildRouter = self.router.getCurrentChildRouter() as Router;
+        if (self.custChildRouter.stateId() === 'detail') {
+            const mc = self.custChildRouter.observableModuleConfig();
+            const customerId = mc.params['ojRouter']['parameters']['id']();
+            CustomersViewModel.navigateToDetail(self.custChildRouter,self.moduleConfig,self.backToListSignal,CustomersViewModel.customers,customerId);
+            
+        } else {
+            console.log(self.custChildRouter);
+            CustomersViewModel.navigateToList(self.custChildRouter, self.moduleConfig, self.customerSelectedSignal, CustomersViewModel.customers);
+        }
         
         
         self.customerSelectedSignal.add(customerId => {
-            self.router.go(`customers/detail/${customerId}`);
-            Utils.resolveViewAndViewModel('customers/detail', self.moduleConfig, 'none', { 'backToListSignal': self.backToListSignal, 'customers': CustomersViewModel.customers, 'customerId': customerId[0]});
+            CustomersViewModel.navigateToDetail(self.custChildRouter,self.moduleConfig,self.backToListSignal,CustomersViewModel.customers,customerId[0]);
         });
 
         self.backToListSignal.add(() => {
-            self.router.go(`customers/list`);
-            Utils.resolveViewAndViewModel('customers/list', self.moduleConfig, 'none', { 'customerSelectedSignal': self.customerSelectedSignal, 'customers': CustomersViewModel.customers});
+            CustomersViewModel.navigateToList(self.custChildRouter, self.moduleConfig, self.customerSelectedSignal, CustomersViewModel.customers);
         })
         
     }

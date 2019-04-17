@@ -28,7 +28,9 @@ requirejs.config({
     'customElements': 'libs/webcomponents/custom-elements.min',
     'css': 'libs/require-css/css',
     'touchr': 'libs/touchr/touchr'
-  }
+  },
+  // Just in case of using urlPathAdapter for Router
+  // baseUrl: window.location.href.split('#')[0].substring(0, window.location.href.split('#')[0].lastIndexOf('/')) + '/js'
   //endinjector
 });
 

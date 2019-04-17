@@ -9,7 +9,6 @@ define(["require", "exports", "ojs/ojarraydataprovider", "ojs/ojlistview"], func
     "use strict";
     var CustomersListViewModel = /** @class */ (function () {
         function CustomersListViewModel(params) {
-            console.log('constructor');
             var self = this;
             self.customerSelectedSignal = params.customerSelectedSignal;
             self.customers = params.customers;

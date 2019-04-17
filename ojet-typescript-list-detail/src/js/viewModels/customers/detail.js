@@ -15,7 +15,7 @@ define(["require", "exports", "knockout", "ojs/ojbutton", "ojs/ojtoolbar", "ojs/
             var customers = params.customers;
             var customerId = params.customerId;
             self.customerSelected = ko.observable(customers[customerId]);
-            self.backButtonAction = function (event) {
+            self.backButtonAction = function (_event) {
                 _this.backToListSignal.dispatch();
             };
         }

@@ -21,7 +21,6 @@ class CustomersListViewModel {
     onSelectCustomer: ojListView<string,object>['onSelectionChanged'];
 
     constructor(params: any) {
-        console.log('constructor');
         let self = this;
         self.customerSelectedSignal = params.customerSelectedSignal;
         self.customers = params.customers;
