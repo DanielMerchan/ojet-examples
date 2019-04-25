@@ -38,3 +38,6 @@ Contains the Oracle JET TypeScript started template of https://www.oracle.com/te
 with a minor fix in the Router configuration
 
 See: http://danielmerchanoracle.blogspot.com/2019/04/ojet-bug-with-routing-in-typescript-template.html
+
+## ojet-typescript-list-detail
+Contains an example built on top of the Oracle JET TypeScript template which shows the usage of ViewModel Parameters and signals npm module for Inter-Module communication
