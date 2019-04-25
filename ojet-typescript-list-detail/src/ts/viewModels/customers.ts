@@ -21,59 +21,71 @@ import Customer = require('../model/Customer');
  */
 class CustomersViewModel {
 
-    // 
+    // Attributes
     router: Router;
     custChildRouter: Router;
     moduleConfig: KnockoutObservable<ojModule['config']>;
     customerSelectedSignal: signals.Signal;
     backToListSignal: signals.Signal;
     static customers: Array<Customer>;
+    currentChildSelection: KnockoutObservable<string>;
 
+    // Static Methods
     static initializeCustomers() {
-        CustomersViewModel.customers = [{id: 0, name: 'Paco', age: 22 },{id: 1, name: 'Eva', age:30}];
+        CustomersViewModel.customers = [{ id: 0, name: 'Paco', age: 22 }, { id: 1, name: 'Eva', age: 30 }];
     }
 
-    static navigateToDetail(router: Router, moduleConfig: KnockoutObservable<ojModule['config']>, backToListSignal: signals.Signal, customers: Array<Customer>, customerId: Number): void {
-        router.go(`detail/${customerId}`);
-        Utils.resolveViewAndViewModel('customers/detail', moduleConfig, 'none', { 'backToListSignal': backToListSignal, 'customers': customers, 'customerId': customerId});
-    }
-
-    static navigateToList(router: Router, moduleConfig: KnockoutObservable<ojModule['config']>, customerSelectedSignal: signals.Signal, customers: Array<Customer>): void {
-        router.go(`list`);
-        Utils.resolveViewAndViewModel('customers/list', moduleConfig, 'none', { 'customerSelectedSignal': customerSelectedSignal, 'customers': customers});
-    }
-
+    /**
+     * Default Constructor of the Customers View Model
+     * It is used as a container / wrapper of the List / Detail Modules
+     */
     constructor() {
         let self = this;
         // Router
         self.router = Router.rootInstance;
         // Parameters to be passed to the child modules
-        self.customerSelectedSignal = new signals.Signal(); // -> For communicating modules
+        self.customerSelectedSignal = new signals.Signal();
         self.backToListSignal = new signals.Signal();
-
+        // Default Module Configuration
         let defaultConfig: ojModule['config'] = { view: [], viewModel: Object, cleanupMode: "onDisconnect" };
         self.moduleConfig = ko.observable(defaultConfig);
-        // Default module reflected in URL
+        // Build default Child Module Configuration based on the Child Router State
         self.custChildRouter = self.router.getCurrentChildRouter() as Router;
-        if (self.custChildRouter.stateId() === 'detail') {
-            const mc = self.custChildRouter.observableModuleConfig();
-            const customerId = mc.params['ojRouter']['parameters']['id']();
-            CustomersViewModel.navigateToDetail(self.custChildRouter,self.moduleConfig,self.backToListSignal,CustomersViewModel.customers,customerId);
-            
-        } else {
-            console.log(self.custChildRouter);
-            CustomersViewModel.navigateToList(self.custChildRouter, self.moduleConfig, self.customerSelectedSignal, CustomersViewModel.customers);
-        }
+        self.loadCustomerModule(self.custChildRouter.moduleConfig.name());
+
         
-        
+        // Signals Listeners
+        // Listen when a customer has been selected in the 'list' module
         self.customerSelectedSignal.add(customerId => {
-            CustomersViewModel.navigateToDetail(self.custChildRouter,self.moduleConfig,self.backToListSignal,CustomersViewModel.customers,customerId[0]);
+            self.custChildRouter.go(`detail/${customerId[0]}`).then(status => {
+                if (status.hasChanged) {
+                    self.loadCustomerModule(self.custChildRouter.moduleConfig.name());
+                }
+
+            });
         });
 
+        // Listen when 'back to list' is clicked in a 'detail' module
         self.backToListSignal.add(() => {
-            CustomersViewModel.navigateToList(self.custChildRouter, self.moduleConfig, self.customerSelectedSignal, CustomersViewModel.customers);
+            self.custChildRouter.go(`list`).then(status => {
+                if (status.hasChanged) {
+                    self.loadCustomerModule(self.custChildRouter.moduleConfig.name());
+                }
+            });
         })
-        
+    }
+
+    // Custom Functions
+    private loadCustomerModule(name: string): void {
+        let data = {};
+        if (name === 'detail') {
+            const mc = this.custChildRouter.observableModuleConfig();
+            const customerId = mc.params['ojRouter']['parameters']['id']();
+            data = { 'backToListSignal': this.backToListSignal, 'customers': CustomersViewModel.customers, 'customerId': customerId };
+        } else {
+            data = { 'customerSelectedSignal': this.customerSelectedSignal, 'customers': CustomersViewModel.customers };
+        }
+        Utils.resolveViewAndViewModel(this.router.moduleConfig.name() + '/' + name, this.moduleConfig, 'none', data);
     }
 
     /*
@@ -92,7 +104,9 @@ class CustomersViewModel {
      * Optional ViewModel method invoked after the View is disconnected from the DOM.
      */
     disconnected(): void {
-        // Implement if needed
+        let self = this;
+        self.customerSelectedSignal.removeAll();
+        self.backToListSignal.removeAll();
     };
 
     /**

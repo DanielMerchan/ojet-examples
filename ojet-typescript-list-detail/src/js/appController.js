@@ -56,7 +56,7 @@ define(["require", "exports", "knockout", "ojs/ojrouter", "./Utils", "ojs/ojarra
             // Header
             // Application Name used in Branding Area
             self.appName = ko.observable("TypeScript Starter Template");
-            // User Info used in Global Navigation area
+            // User Info used in Global Navigati*on area
             self.userLogin = ko.observable("john.hancock@oracle.com");
             // Dropdown menu states
             self.menuItemSelect = function (event) {

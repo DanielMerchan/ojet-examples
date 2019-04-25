@@ -14,12 +14,29 @@ import signals = require('signals');
 import Customer = require('src/ts/model/Customer');
 import * as ko from "knockout";
 
+/**
+ * ViewModel for the Detail Module wrapped by the Customer Module
+ * @author Daniel Merchan Garcia
+ * @version 6.2.0
+ */
 class CustomersDetailViewModel {
 
+    // Attributes
     backButtonAction: ojButton['onOjAction'];
     backToListSignal: signals.Signal;
     customerSelected: KnockoutObservable<Customer>;
 
+    /**
+     * Constructor
+     * Takes the customerId and the customersList as parameters. 
+     * For Demo purposes, we use a set of Data loaded directly in memory.
+     * 
+     * @constructs CustomersDetailViewModel
+     * 
+     * @fires CustomersViewModel#backToListSignal
+     * @param {any} params Parameters sent by the Customer Wrapper Module
+     * 
+     */
     constructor(params: any) {
         let self = this;
         self.backToListSignal = params.backToListSignal;

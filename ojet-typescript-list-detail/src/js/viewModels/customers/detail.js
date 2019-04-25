@@ -7,7 +7,23 @@
  */
 define(["require", "exports", "knockout", "ojs/ojbutton", "ojs/ojtoolbar", "ojs/ojlabel"], function (require, exports, ko) {
     "use strict";
+    /**
+     * ViewModel for the Detail Module wrapped by the Customer Module
+     * @author Daniel Merchan Garcia
+     * @version 6.2.0
+     */
     var CustomersDetailViewModel = /** @class */ (function () {
+        /**
+         * Constructor
+         * Takes the customerId and the customersList as parameters.
+         * For Demo purposes, we use a set of Data loaded directly in memory.
+         *
+         * @constructs CustomersDetailViewModel
+         *
+         * @fires CustomersViewModel#backToListSignal
+         * @param {any} params Parameters sent by the Customer Wrapper Module
+         *
+         */
         function CustomersDetailViewModel(params) {
             var _this = this;
             var self = this;
