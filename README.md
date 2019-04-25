@@ -41,3 +41,5 @@ See: http://danielmerchanoracle.blogspot.com/2019/04/ojet-bug-with-routing-in-ty
 
 ## ojet-typescript-list-detail
 Contains an example built on top of the Oracle JET TypeScript template which shows the usage of ViewModel Parameters and signals npm module for Inter-Module communication
+
+See: http://danielmerchanoracle.blogspot.com/2019/04/ojet-inter-modular-communication-in-ts-template.html
