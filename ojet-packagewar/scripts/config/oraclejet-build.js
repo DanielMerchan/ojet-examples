@@ -5,7 +5,7 @@
 'use strict';
 /**
  * # oraclejet-build.js
- * This script allows users to configure and customize the grunt build tasks. 
+ * This script allows users to configure and customize the build tasks. 
  * Configurable tasks include: 
  *   copySrcToStaging
  *   copyCustomLibsToStaging

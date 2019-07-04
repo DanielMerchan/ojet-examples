@@ -3,8 +3,11 @@
   "use": "local",
 
   "cdns": {
-    "jet": "https://static.oracle.com/cdn/jet/v6.1.0/default/js",
-    "3rdparty": "https://static.oracle.com/cdn/jet/v6.1.0/3rdparty"
+    "jet": {
+      "prefix": "https://static.oracle.com/cdn/jet/v7.0.0/default/js",
+      "config": "bundles-config.js"
+    },
+    "3rdparty": "https://static.oracle.com/cdn/jet/v7.0.0/3rdparty"
   },
 
   "libs": {
@@ -15,12 +18,12 @@
       "debug": {
         "src": "knockout-latest.debug.js",
         "path": "libs/knockout/knockout-#{version}.debug.js",
-        "cdnPath": "knockout/knockout-3.4.2.debug"
+        "cdnPath": "knockout/knockout-3.5.0.debug"
       },
       "release": {
         "src": "knockout-latest.js",
         "path": "libs/knockout/knockout-#{version}.js",
-        "cdnPath": "knockout/knockout-3.4.2"
+        "cdnPath": "knockout/knockout-3.5.0"
       }
     },
 
@@ -30,12 +33,12 @@
       "debug": {
         "src": "jquery.js",
         "path": "libs/jquery/jquery-#{version}.js",
-        "cdnPath": "jquery/jquery-3.3.1"
+        "cdnPath": "jquery/jquery-3.4.1"
       },
       "release": {
         "src": "jquery.min.js",
         "path": "libs/jquery/jquery-#{version}.min.js",
-        "cdnPath": "jquery/jquery-3.3.1.min"
+        "cdnPath": "jquery/jquery-3.4.1.min"
       }
     },
 
@@ -96,6 +99,23 @@
         "src": "dnd-polyfill-1.0.0.min.js",
         "path": "libs/dnd-polyfill/dnd-polyfill-1.0.0.min.js",
         "cdnPath": "dnd-polyfill/dnd-polyfill-1.0.0.min"
+      }
+    },
+
+    "persist": {
+      "cdn": "3rdparty",
+      "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/persist",
+      "debug": {
+        "cwd": "debug",
+        "src": ["**"],
+        "path": "libs/persist/debug",
+        "cdnPath": "persist/debug"
+      },
+      "release": {
+        "cwd": "min",
+        "src": ["**"],
+        "path": "libs/persist/min",
+        "cdnPath": "persist/min"
       }
     },
 
@@ -161,21 +181,6 @@
       }
     },
 
-    "touchr": {
-      "cdn": "3rdparty",
-      "cwd": "node_modules/touchr/js",
-      "debug": {
-        "src":  "touchr.js",
-        "path": "libs/touchr/touchr.js",
-        "cdnPath": "touchr/touchr"
-      },
-      "release": {
-        "src": "touchr.js",
-        "path": "libs/touchr/touchr.js",
-        "cdnPath": "touchr/touchr"
-      }
-    },
-
     "signals": {
       "cdn": "3rdparty",
       "cwd": "node_modules/signals/dist",
@@ -188,6 +193,21 @@
         "src": "signals.min.js",
         "path": "libs/js-signals/signals.min.js",
         "cdnPath": "js-signals/signals.min"
+      }
+    },
+
+    "touchr": {
+      "cdn": "3rdparty",
+      "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/touchr",
+      "debug": {
+        "src":  "touchr.js",
+        "path": "libs/touchr/touchr.js",
+        "cdnPath": "touchr/touchr"
+      },
+      "release": {
+        "src": "touchr.js",
+        "path": "libs/touchr/touchr.js",
+        "cdnPath": "touchr/touchr"
       }
     },
 

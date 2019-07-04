@@ -1,11 +1,11 @@
 /**
-  Copyright (c) 2015, 2018, Oracle and/or its affiliates.
+  Copyright (c) 2015, 2019, Oracle and/or its affiliates.
   The Universal Permissive License (UPL), Version 1.0
 */
 'use strict';
 /**
  * # oraclejet-build.js
- * This script allows users to configure and customize the grunt build tasks. 
+ * This script allows users to configure and customize the build tasks. 
  * Configurable tasks include: 
  *   copySrcToStaging
  *   copyCustomLibsToStaging

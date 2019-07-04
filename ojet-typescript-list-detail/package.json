@@ -3,11 +3,10 @@
   "version": "2.0.0",
   "description": "An Oracle JavaScript Extension Toolkit(JET) web app for TypeScript",
   "dependencies": {
-    "@oracle/oraclejet": "~6.2.0"
+    "@oracle/oraclejet": "^7.0.1",
+    "@oracle/oraclejet-tooling": "^7.0.0"
   },
-  "devDependencies": {
-    "@oracle/oraclejet-tooling": "~6.2.0"
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=5.0.0"
   },

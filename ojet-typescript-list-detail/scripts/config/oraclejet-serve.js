@@ -1,11 +1,11 @@
 /**
-  Copyright (c) 2015, 2018, Oracle and/or its affiliates.
+  Copyright (c) 2015, 2019, Oracle and/or its affiliates.
   The Universal Permissive License (UPL), Version 1.0
 */
 'use strict';
 /**
  * # oraclejet-serve.js
- * This script allows users to configure and customize the grunt serve tasks.
+ * This script allows users to configure and customize the serve tasks.
  * Configurable tasks: connect, watch.
  * To configure a task, uncomment the corresponding sections below, and pass in your configurations.
  * Any options will be merged with default configuration found in node_modules/@oracle/oraclejet-tooling/lib/defaultconfig.js
@@ -62,7 +62,7 @@ module.exports = function () {
  *   port, port number, default 8000
  *   hostname, a string of the domain name, default localhost
  *   livereload, a boolean for livereload, default true in dev mode, false in release mode (overwritten when )
- *   open, a blooean for wheather to launch browser, default to true
+ *   open, a boolean for wheather to launch browser, default to true
  *   base, a string of the target directory to be served, default to the staging area
  */
     // connect: {

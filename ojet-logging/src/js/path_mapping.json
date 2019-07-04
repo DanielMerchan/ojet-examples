@@ -1,74 +1,86 @@
 {
   "baseUrl": "js",
   "use": "local",
-
   "cdns": {
-    "jet": "https://static.oracle.com/cdn/jet/v6.1.0/default/js",
-    "3rdparty": "https://static.oracle.com/cdn/jet/v6.1.0/3rdparty"
+    "jet": {
+      "prefix": "https://static.oracle.com/cdn/jet/v7.0.0/default/js",
+      "config": "bundles-config.js"
+    },
+    "3rdparty": "https://static.oracle.com/cdn/jet/v7.0.0/3rdparty"
   },
-
   "libs": {
-
     "knockout": {
       "cdn": "3rdparty",
       "cwd": "node_modules/knockout/build/output",
       "debug": {
         "src": "knockout-latest.debug.js",
         "path": "libs/knockout/knockout-#{version}.debug.js",
-        "cdnPath": "knockout/knockout-3.4.2.debug"
+        "cdnPath": "knockout/knockout-3.5.0.debug"
       },
       "release": {
         "src": "knockout-latest.js",
         "path": "libs/knockout/knockout-#{version}.js",
-        "cdnPath": "knockout/knockout-3.4.2"
+        "cdnPath": "knockout/knockout-3.5.0"
       }
     },
-
     "jquery": {
       "cdn": "3rdparty",
       "cwd": "node_modules/jquery/dist",
       "debug": {
         "src": "jquery.js",
         "path": "libs/jquery/jquery-#{version}.js",
-        "cdnPath": "jquery/jquery-3.3.1"
+        "cdnPath": "jquery/jquery-3.4.1"
       },
       "release": {
         "src": "jquery.min.js",
         "path": "libs/jquery/jquery-#{version}.min.js",
-        "cdnPath": "jquery/jquery-3.3.1.min"
+        "cdnPath": "jquery/jquery-3.4.1.min"
       }
     },
-
     "jqueryui-amd": {
       "cdn": "3rdparty",
       "cwd": "node_modules/jquery-ui/ui",
       "debug": {
-        "src": ["*.js", "widgets/draggable.js", "widgets/mouse.js", "widgets/sortable.js"],
+        "src": [
+          "*.js",
+          "widgets/draggable.js",
+          "widgets/mouse.js",
+          "widgets/sortable.js"
+        ],
         "path": "libs/jquery/jqueryui-amd-#{version}",
         "cdnPath": "jquery/jqueryui-amd-1.12.1"
       },
       "release": {
-        "src": ["*.js", "widgets/draggable.js", "widgets/mouse.js", "widgets/sortable.js"],
+        "src": [
+          "*.js",
+          "widgets/draggable.js",
+          "widgets/mouse.js",
+          "widgets/sortable.js"
+        ],
         "path": "libs/jquery/jqueryui-amd-#{version}.min",
         "cdnPath": "jquery/jqueryui-amd-1.12.1.min"
       }
     },
-
     "promise": {
       "cdn": "3rdparty",
       "cwd": "node_modules/es6-promise/dist",
       "debug": {
-        "src": ["es6-promise.js", "es6-promise.map"],
+        "src": [
+          "es6-promise.js",
+          "es6-promise.map"
+        ],
         "path": "libs/es6-promise/es6-promise.js",
         "cdnPath": "es6-promise/es6-promise"
       },
       "release": {
-        "src": ["es6-promise.min.js", "es6-promise.min.map"],
+        "src": [
+          "es6-promise.min.js",
+          "es6-promise.min.map"
+        ],
         "path": "libs/es6-promise/es6-promise.min.js",
         "cdnPath": "es6-promise/es6-promise.min"
       }
     },
-
     "hammerjs": {
       "cdn": "3rdparty",
       "cwd": "node_modules/hammerjs",
@@ -83,7 +95,6 @@
         "cdnPath": "hammer/hammer-2.0.8.min"
       }
     },
-
     "ojdnd": {
       "cdn": "3rdparty",
       "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/dnd-polyfill",
@@ -98,29 +109,51 @@
         "cdnPath": "dnd-polyfill/dnd-polyfill-1.0.0.min"
       }
     },
-
+    "persist": {
+      "cdn": "3rdparty",
+      "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/persist",
+      "debug": {
+        "cwd": "debug",
+        "src": [
+          "**"
+        ],
+        "path": "libs/persist/debug",
+        "cdnPath": "persist/debug"
+      },
+      "release": {
+        "cwd": "min",
+        "src": [
+          "**"
+        ],
+        "path": "libs/persist/min",
+        "cdnPath": "persist/min"
+      }
+    },
     "ojs": {
       "cdn": "jet",
       "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/oj",
       "debug": {
-        "cwd": "debug", 
-        "src": ["**"],
+        "cwd": "debug",
+        "src": [
+          "**"
+        ],
         "path": "libs/oj/v#{version}/debug",
         "cdnPath": "debug"
       },
       "release": {
-        "cwd": "min", 
-        "src": ["**"],
+        "cwd": "min",
+        "src": [
+          "**"
+        ],
         "path": "libs/oj/v#{version}/min",
         "cdnPath": "min"
       }
     },
-
     "ojL10n": {
       "cdn": "jet",
       "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/oj",
       "debug": {
-        "src":  "ojL10n.js",
+        "src": "ojL10n.js",
         "path": "libs/oj/v#{version}/ojL10n.js",
         "cdnPath": "ojL10n"
       },
@@ -130,27 +163,29 @@
         "cdnPath": "ojL10n"
       }
     },
-
     "ojtranslations": {
       "cdn": "jet",
       "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/oj/resources",
       "debug": {
-        "src":  ["**"],
+        "src": [
+          "**"
+        ],
         "path": "libs/oj/v#{version}/resources",
         "cdnPath": "resources"
       },
       "release": {
-        "src": ["**"],
+        "src": [
+          "**"
+        ],
         "path": "libs/oj/v#{version}/resources",
         "cdnPath": "resources"
       }
     },
-
     "text": {
       "cdn": "3rdparty",
       "cwd": "node_modules/requirejs-text",
       "debug": {
-        "src":  "text.js",
+        "src": "text.js",
         "path": "libs/require/text.js",
         "cdnPath": "require/text"
       },
@@ -160,27 +195,11 @@
         "cdnPath": "require/text"
       }
     },
-
-    "touchr": {
-      "cdn": "3rdparty",
-      "cwd": "node_modules/touchr/js",
-      "debug": {
-        "src":  "touchr.js",
-        "path": "libs/touchr/touchr.js",
-        "cdnPath": "touchr/touchr"
-      },
-      "release": {
-        "src": "touchr.js",
-        "path": "libs/touchr/touchr.js",
-        "cdnPath": "touchr/touchr"
-      }
-    },
-
     "signals": {
       "cdn": "3rdparty",
       "cwd": "node_modules/signals/dist",
       "debug": {
-        "src":  "signals.js",
+        "src": "signals.js",
         "path": "libs/js-signals/signals.js",
         "cdnPath": "js-signals/signals"
       },
@@ -190,50 +209,79 @@
         "cdnPath": "js-signals/signals.min"
       }
     },
-
+    "touchr": {
+      "cdn": "3rdparty",
+      "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/touchr",
+      "debug": {
+        "src": "touchr.js",
+        "path": "libs/touchr/touchr.js",
+        "cdnPath": "touchr/touchr"
+      },
+      "release": {
+        "src": "touchr.js",
+        "path": "libs/touchr/touchr.js",
+        "cdnPath": "touchr/touchr"
+      }
+    },
     "customElements": {
       "cdn": "3rdparty",
       "cwd": "node_modules/@webcomponents/custom-elements",
       "debug": {
-        "src":  ["custom-elements.min.js", "custom-elements.min.js.map"],
+        "src": [
+          "custom-elements.min.js",
+          "custom-elements.min.js.map"
+        ],
         "path": "libs/webcomponents/custom-elements.min.js",
         "cdnPath": "webcomponents/custom-elements.min"
       },
       "release": {
-        "src": ["custom-elements.min.js", "custom-elements.min.js.map"],
+        "src": [
+          "custom-elements.min.js",
+          "custom-elements.min.js.map"
+        ],
         "path": "libs/webcomponents/custom-elements.min.js",
         "cdnPath": "webcomponents/custom-elements.min"
       }
     },
-
     "css": {
       "cdn": "3rdparty",
       "cwd": "node_modules/require-css",
       "debug": {
-        "src":  ["css.js", "css-builder.js", "normalize.js"],
+        "src": [
+          "css.js",
+          "css-builder.js",
+          "normalize.js"
+        ],
         "path": "libs/require-css/css.js",
         "cdnPath": "require-css/css"
       },
       "release": {
-        "src": ["css.min.js", "css-builder.js", "normalize.js"],
+        "src": [
+          "css.min.js",
+          "css-builder.js",
+          "normalize.js"
+        ],
         "path": "libs/require-css/css.min.js",
         "cdnPath": "require-css/css.min"
       }
     },
-
     "js-logger": {
       "cdn": "3rdparty",
       "cwd": "node_modules/js-logger/src",
       "debug": {
-        "src":  ["logger.js"],
+        "src": [
+          "logger.js"
+        ],
         "path": "libs/js-logger/logger.js",
         "cdnPath": "js-logger/logger"
       },
       "release": {
-        "src": ["logger.min.js"],
+        "src": [
+          "logger.min.js"
+        ],
         "path": "libs/js-logger/logger.min.js",
         "cdnPath": "js-logger/logger"
       }
     }
   }
-} 
+}
