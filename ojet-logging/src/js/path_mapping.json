@@ -3,10 +3,10 @@
   "use": "local",
   "cdns": {
     "jet": {
-      "prefix": "https://static.oracle.com/cdn/jet/v7.0.0/default/js",
+      "prefix": "https://static.oracle.com/cdn/jet/v7.1.0/default/js",
       "config": "bundles-config.js"
     },
-    "3rdparty": "https://static.oracle.com/cdn/jet/v7.0.0/3rdparty"
+    "3rdparty": "https://static.oracle.com/cdn/jet/v7.1.0/3rdparty"
   },
   "libs": {
     "knockout": {
@@ -109,26 +109,6 @@
         "cdnPath": "dnd-polyfill/dnd-polyfill-1.0.0.min"
       }
     },
-    "persist": {
-      "cdn": "3rdparty",
-      "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/persist",
-      "debug": {
-        "cwd": "debug",
-        "src": [
-          "**"
-        ],
-        "path": "libs/persist/debug",
-        "cdnPath": "persist/debug"
-      },
-      "release": {
-        "cwd": "min",
-        "src": [
-          "**"
-        ],
-        "path": "libs/persist/min",
-        "cdnPath": "persist/min"
-      }
-    },
     "ojs": {
       "cdn": "jet",
       "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/oj",
@@ -195,20 +175,6 @@
         "cdnPath": "require/text"
       }
     },
-    "signals": {
-      "cdn": "3rdparty",
-      "cwd": "node_modules/signals/dist",
-      "debug": {
-        "src": "signals.js",
-        "path": "libs/js-signals/signals.js",
-        "cdnPath": "js-signals/signals"
-      },
-      "release": {
-        "src": "signals.min.js",
-        "path": "libs/js-signals/signals.min.js",
-        "cdnPath": "js-signals/signals.min"
-      }
-    },
     "touchr": {
       "cdn": "3rdparty",
       "cwd": "node_modules/@oracle/oraclejet/dist/js/libs/touchr",
@@ -221,6 +187,20 @@
         "src": "touchr.js",
         "path": "libs/touchr/touchr.js",
         "cdnPath": "touchr/touchr"
+      }
+    },
+    "signals": {
+      "cdn": "3rdparty",
+      "cwd": "node_modules/signals/dist",
+      "debug": {
+        "src": "signals.js",
+        "path": "libs/js-signals/signals.js",
+        "cdnPath": "js-signals/signals"
+      },
+      "release": {
+        "src": "signals.min.js",
+        "path": "libs/js-signals/signals.min.js",
+        "cdnPath": "js-signals/signals.min"
       }
     },
     "customElements": {
