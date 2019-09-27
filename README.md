@@ -37,9 +37,15 @@ See: http://danielmerchanoracle.blogspot.com/2019/04/wcpadf-to-ojet-adf-taskflow
 Contains the Oracle JET TypeScript started template of https://www.oracle.com/technetwork/developer-tools/jet/downloads/index.html
 with a minor fix in the Router configuration
 
+> **Note:** Since Oracle JET 7.2.0 you can use the OJET-CLI to scaffold a Oracle JET Application with TypeScript
+> **Example** ```ojet create web-app-navbar --template=navbar --typescript```
+
 See: http://danielmerchanoracle.blogspot.com/2019/04/ojet-bug-with-routing-in-typescript-template.html
 
 ## ojet-typescript-list-detail
 Contains an example built on top of the Oracle JET TypeScript template which shows the usage of ViewModel Parameters and signals npm module for Inter-Module communication
 
 See: http://danielmerchanoracle.blogspot.com/2019/04/ojet-inter-modular-communication-in-ts-template.html
+
+> **Note:** Since Oracle JET 7.2.0 you can use the OJET-CLI to scaffold a Oracle JET Application with TypeScript
+> **Example** ```ojet create web-app-navbar --template=navbar --typescript```
