@@ -62,7 +62,7 @@ See: Blog entry work in progress
 
 ## ojet-page-not-found-handling
 Changed the navigation handling in Navdrawer template in index.html + appController.js to demonstrate how to catch errors when trying to navigate to a Module that cannot be loaded because
-- router.go cannot find the StateIdPath because is not part of the router -> Loads a module-not-found Module
-- loadModule fails to generate the Module Config because the View or the Module file is missing -> Loads the module-not-found Module
+- ```router.go``` cannot find the StateIdPath because is not part of the router -> Loads a module-not-found Module
+- ```self.loadModule``` fails to generate the Module Config because the View or the Module file is missing -> Loads the module-not-found Module
 
 See: Blog entry work in progress
