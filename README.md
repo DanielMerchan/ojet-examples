@@ -49,3 +49,9 @@ See: http://danielmerchanoracle.blogspot.com/2019/04/ojet-inter-modular-communic
 
 > **Note:** Since Oracle JET 7.2.0 you can use the OJET-CLI to scaffold a Oracle JET Application with TypeScript
 > **Example** ```ojet create web-app-navbar --template=navbar --typescript```
+
+## ojet-add-jet-comp-programmatically
+Adds programmatically an ```<oj-checkboxset>``` and an ```<oj-input-text``` from the ViewModel into a View
+
+## ojet-checkboxset-select-all
+Example about how to make a Select All for a ```<oj-checkboxset>``` based on another ```<oj-checkboxset>```

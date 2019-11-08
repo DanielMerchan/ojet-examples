@@ -1,0 +1,20 @@
+<!--
+ Copyright (c) 2014, 2019, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+  <h1>Select All - Checkbox Demo</h1>
+  <oj-checkboxset id="sacbs" labelled-by="salbl" on-value-changed="[[selectAllOptionChanged]]" value="{{selectAll}}">
+    <oj-option id="saopall" value="all" >Select All</oj-option>
+  </oj-checkboxset>
+  <br/>
+  <oj-checkboxset id="checkboxSetId" labelled-by="mainlabelid" value="{{currentColor}}" on-value-changed="[[singleOptionChanged]]">
+    <oj-bind-for-each data="[[colorOptions]]">
+      <template>
+        <oj-option :id="[[$current.data.id]]" value="[[$current.data.value]]">
+          <oj-bind-text value="[[$current.data.color]]"></oj-bind-text>
+        </oj-option>
+      </template>
+    </oj-bind-for-each>
+  </oj-checkboxset>
+</div>
