@@ -1,6 +1,6 @@
 # Oracle JET : JET Examples
 
-**Version 7.1.0 of Oracle JET**
+**Version: 7.2.0**
 
 ## ojet-interationalization
 
