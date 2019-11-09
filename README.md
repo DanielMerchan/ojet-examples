@@ -53,16 +53,16 @@ See: http://danielmerchanoracle.blogspot.com/2019/04/ojet-inter-modular-communic
 ## ojet-add-jet-comp-programmatically
 Adds programmatically an ```<oj-checkboxset>``` and an ```<oj-input-text>``` from the ViewModel into a View
 
-See: Blog entry work in progress
+See: http://danielmerchanoracle.blogspot.com/2019/11/ojet-adding-jet-component.html
 
 ## ojet-checkboxset-select-all
 Example about how to make a Select All for a ```<oj-checkboxset>``` based on another ```<oj-checkboxset>```
 
-See: Blog entry work in progress
+See: http://danielmerchanoracle.blogspot.com/2019/11/ojet-select-all-options-using-only.html
 
 ## ojet-page-not-found-handling
 Changed the navigation handling in Navdrawer template in index.html + appController.js to demonstrate how to catch errors when trying to navigate to a Module that cannot be loaded because
 - ```router.go``` cannot find the StateIdPath because is not part of the router -> Loads a module-not-found Module
 - ```self.loadModule``` fails to generate the Module Config because the View or the Module file is missing -> Loads the module-not-found Module
 
-See: Blog entry work in progress
+See: http://danielmerchanoracle.blogspot.com/2019/11/ojet-module-not-found-handling.html

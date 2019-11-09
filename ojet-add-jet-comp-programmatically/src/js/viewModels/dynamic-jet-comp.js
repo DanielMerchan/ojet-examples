@@ -9,7 +9,7 @@
 define(['knockout', 'ojs/ojinputtext', 'ojs/ojcheckboxset'],
   function (ko) {
 
-    function DashboardViewModel() {
+    function DynamicJETViewModel() {
       var self = this;
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
@@ -53,14 +53,6 @@ define(['knockout', 'ojs/ojinputtext', 'ojs/ojcheckboxset'],
         fakeDiv.insertAdjacentHTML('beforeend','<oj-checkboxset on-value-changed="[[checkBoxSetClicked]]" value={{checkBoxSelection}} label-hint="Enabled"><oj-option value="desktop">Desktop</oj-option><oj-option value="laptop">Laptop</oj-option><oj-option value="tablet">Tablet</oj-option></oj-checkboxset>' )
         ko.cleanNode(fakeDiv);
         ko.applyBindings(this,fakeDiv);
-
-        // ko.bindingHandlers['fake'] = {
-        //   update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-        //     console.log("hghg");
-        //     ko.utils.setHtml(element, valueAccessorcd ());
-        //     ko.applyBindingsToDescendants(bindingContext, element);
-        //   }
-        // };
       };
     }
 
@@ -69,6 +61,6 @@ define(['knockout', 'ojs/ojinputtext', 'ojs/ojcheckboxset'],
      * each time the view is displayed.  Return an instance of the ViewModel if
      * only one instance of the ViewModel is needed.
      */
-    return new DashboardViewModel();
+    return new DynamicJETViewModel();
   }
 );

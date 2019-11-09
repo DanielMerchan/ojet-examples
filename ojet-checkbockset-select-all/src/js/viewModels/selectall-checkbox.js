@@ -6,10 +6,10 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['knockout', 'ojs/ojcheckboxset', 'ojs/ojbutton'],
+define(['knockout', 'ojs/ojcheckboxset'],
   function (ko) {
 
-    function DashboardViewModel() {
+    function SelectAllCBViewModel() {
       var self = this;
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
@@ -23,7 +23,6 @@ define(['knockout', 'ojs/ojcheckboxset', 'ojs/ojbutton'],
       ]);
 
       self.selectAll = ko.observableArray([]);
-
       self.currentColor = ko.observableArray(["red"]);
 
       self.selectAllOptionChanged = (event) => {
@@ -39,12 +38,9 @@ define(['knockout', 'ojs/ojcheckboxset', 'ojs/ojbutton'],
 
       self.singleOptionChanged = (event) => {
         if (event.detail.value.length === self.colorOptions().length) {
-          self.colorOptions().forEach(element => {
-            self.currentColor.push(element.value);
-          });
           self.selectAll(['all']);
         }
-        else if (event.detail.value.length === 0) {
+        else {
           self.selectAll([]);
         }
       }
@@ -83,6 +79,6 @@ define(['knockout', 'ojs/ojcheckboxset', 'ojs/ojbutton'],
      * each time the view is displayed.  Return an instance of the ViewModel if
      * only one instance of the ViewModel is needed.
      */
-    return new DashboardViewModel();
+    return new SelectAllCBViewModel();
   }
 );
